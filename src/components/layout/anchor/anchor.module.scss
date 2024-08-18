@@ -1,0 +1,42 @@
+@import '../../../styles/style.scss';
+
+.menu {
+    border-bottom: 1px solid var(--base-bg-color-gray);
+    position: sticky;
+    top: 8.3rem;
+    background: var(--base-bg-color-light);
+    z-index: 9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+}
+
+.container {
+    @include container;
+}
+
+.menuContainer {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav {
+    @include flex-align(flex-start, flex-start);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include min(tablet) {
+        @include flex-align(center, center, 1.6rem);
+    }
+}
+
+.item {
+    padding: 1rem 0;
+}
+
+.active {
+    border-bottom: 1px solid #000000;
+}

@@ -1,0 +1,44 @@
+@import '../../styles/style.scss';
+
+.filters {
+    > button {
+        @include flex-align(center, center);
+    }
+}
+
+.filtersContainer {
+    position: fixed;
+    transition: 0.5s;
+    left: -100%;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--base-bg-color-light);
+    background-color: rgba(0,0,0,.6);
+    font-size: 1.8rem;
+    z-index: 20;
+}
+
+.show {
+    overflow-y: auto;
+    max-height: calc(100vh - var(--nav-height));
+    left: 0;
+}
+
+.filtersHeader {
+    @include flex-align(flex-start, space-between);
+}
+
+.filtersContent {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 80%;
+    max-width: 39rem;
+    background: var(--base-bg-color-light);
+    padding: 1.6rem;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+    font-size: 1.8rem;
+    z-index: 20;
+}

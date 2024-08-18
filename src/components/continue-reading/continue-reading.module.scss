@@ -1,0 +1,27 @@
+@import '../../styles/style.scss';
+
+.continueReading {
+    @include flex-align(center, flex-end, 0.2rem);
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        content: "";
+    }
+
+    &:hover {
+        svg {
+            transform: translateX(0.5rem);
+        }
+    }
+
+    svg {
+        transition: .2s ease-in-out transform;
+    }
+}

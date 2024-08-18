@@ -1,0 +1,5 @@
+@import '../../styles/style.scss';
+
+.author {
+    @include flex-align(center, flex-start, 4px);
+}

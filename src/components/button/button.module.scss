@@ -1,0 +1,35 @@
+@import '../../styles/style.scss';
+
+.primary {
+  @include buttonsColor(
+    var(--primary-button-color, var(--secondary-color)),
+    var(--primary-button-color-hover, #0b5ed7),
+    var(--primary-button-color-active, #0b5ed7),
+    var(--primary-button-color-text, #ffffff)
+  );
+  white-space: nowrap;
+  border-radius: 8px;
+
+  &.inactive {
+    white-space: normal;
+    background-color: #bbb5dd;
+    color: #776aba;
+  }
+}
+
+.secondary {
+  @include buttonsColor(
+    var(--secondary-button-color, #1c1a28),
+    var(--secondary-button-color-hover, #515156),
+    var(--secondary-button-color-active, #3e3c47),
+    var(--secondary-button-color-text, #ffffff)
+  );
+  white-space: nowrap;
+  border-radius: 8px;
+
+  &.inactive {
+    white-space: normal;
+    background-color: #6b6a72;
+    color: #3e3c47;
+  }
+}

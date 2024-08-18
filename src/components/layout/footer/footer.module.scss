@@ -1,0 +1,10 @@
+
+@import '../../../styles/style.scss';
+
+.footer {
+    background: var(--base-bg-color-gray);
+}
+
+.container {
+    @include container;
+}

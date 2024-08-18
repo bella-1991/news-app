@@ -1,0 +1,112 @@
+@import '../../styles/style.scss';
+
+.padd { 
+  @include flex-align(center, center);
+  border-radius: var(--pagination-border-radius, 100px);
+  border: var(--pagination-border, none);
+  font-size: calc(var(--pagination-font-size, 1.6rem) - 2px);
+  line-height: calc(var(--pagination-line-height, 4.8rem) - 2px);
+  font-weight: var(--pagination-font-weight, 500);
+  width: calc(var(--pagination-width, 4rem) - 1rem);
+  height: calc(var(--pagination-height, 4rem) - 1rem);
+  background-color: var(--pagination-background-color, var(--base-bg-color-gray));
+
+  @include min(mobile) {
+    width: var(--pagination-width, 4rem);
+    height: var(--pagination-height, 4rem);
+    font-size: var(--pagination-font-size, 1.6rem);
+    line-height: var(--pagination-line-height, 4.8rem);
+  }
+}
+
+.pagination {
+  padding: 1.6rem 0 !important;
+  display: grid;
+  column-gap: var(--pagination-gap, 0.8rem);
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  ul {
+    display: grid;
+    column-gap: var(--pagination-midpoints-gap, 0);
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--pagination-midpoints-background-color, var(--base-bg-color-gray));
+    border-radius: var(--pagination-midpoints-border-radius, 100px);
+
+    > li {
+      @include flex-align(center, center)
+    }
+  }
+
+  a,
+  span {
+    @extend .padd;
+    color: var(--pagination-active-color, #2e3337);
+  }
+
+  a {
+    &:hover,
+    &:focus {
+      background-color: var(--pagination-hover-background-color, var(--pagination-background-color, var(--base-bg-color-gray)));
+      color: var(--pagination-active-hover-color, var(--pagination-active-color, #2e3337));
+    }
+  }
+
+  .button {
+    @extend .padd;
+    cursor: not-allowed;
+    color: var(--pagination-inactive-color, #ffffff);
+    fill: var(--pagination-inactive-color, #ffffff);
+    background-color: var(--pagination-inactive-background-color, var(--pagination-background-color, var(--base-bg-color-gray)));
+    width: calc(var(--pagination-button-width, var(--pagination-width, 4rem)) - 1rem);
+    height: calc(var(--pagination-button-height, var(--pagination-height, 4rem)) - 1rem);
+    
+    @include min(mobile) {
+      width: var(--pagination-button-width, var(--pagination-width, 4rem));
+      height: var(--pagination-button-height, var(--pagination-height, 4rem));
+    }
+
+    > svg {
+      opacity: var(--pagination-inactive-opacity, 1);
+    }
+
+    &.isActive {
+      color: var(--pagination-active-button-color, var(--pagination-active-color, #2e3337));
+      fill: var(--pagination-active-button-color, var(--pagination-active-color, #2e3337));
+      background-color: var(--pagination-active-background-color, var(--pagination-background-color, var(--base-bg-color-gray)));
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        color: var(--pagination-active-button-hover-color, var(--pagination-active-button-color, #2e3337));
+        fill: var(--pagination-active-button-hover-color, var(--pagination-active-button-color, #2e3337));
+        background-color: var(--pagination-active-hover-background-color, var(--pagination-active-background-color, var(--base-bg-color-gray)));
+      }
+
+      > svg {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.active a {
+  color: var(--pagination-current-page-color, #ffffff);
+  background-color: var(--pagination-current-page-background-color, var(--secondary-color));
+  border: var(--pagination-current-page-border, var(--pagination-border, none));
+  font-weight: var(--pagination-active-font-weight, 700);
+
+  &:hover,
+  &:focus {
+    color: var(--pagination-current-page-hover-color, var(--pagination-current-page-color, #ffffff));
+    background-color: var(--pagination-current-page-hover-background-color, var(--pagination-current-page-background-color, #2e3337));
+    border: var(--pagination-current-page-hover-border, var(--pagination-current-page-border, var(--pagination-border, none)));
+  }
+}
+
+.showOfCurrent {
+  gap: var(--pagination-gap, 0.8rem);
+}

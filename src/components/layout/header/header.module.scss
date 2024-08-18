@@ -1,0 +1,30 @@
+@import '../../../styles/style.scss';
+
+.container {
+    @include container;
+    @include flex-align(center, space-between);
+
+    > a {
+        color: var(--base-color);
+    }
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    background-color: var(--base-bg-color-light);
+    border-bottom: 1px solid var(--base-bg-color-gray);
+
+    @include min(tablet) {
+        font-size: 4rem;
+        line-height: 5rem;
+    }
+}
+
+.menuBtn {
+    width: 3rem;
+    height: 3rem;
+}

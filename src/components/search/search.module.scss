@@ -1,0 +1,55 @@
+@import '../../styles/style.scss';
+
+.search {
+    > button {
+        @include flex-align(center, center);
+    }
+}
+.searchForm {
+    background-color: rgba(0,0,0,.6);
+    height: 100vh;
+    left: 0;
+    max-height: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    transition: max-height 0s ease-out;
+    width: 100%;
+    z-index: 15;
+    line-height: 3rem;
+}
+
+.show {
+    display: inherit;
+    max-height: 100vh;
+    overflow-y: auto;
+    transition: max-height 0s ease-in;
+}
+
+.form {
+    @include flex-direction(column);
+    @include flex-align(stretch, center);
+    left: 50%;
+    max-width: var(--main-container-max);
+    padding: 0 1.6rem;
+    position: absolute;
+    top: 8rem;
+    transform: translateX(-50%);
+    width: 100%;
+
+    @include min(tablet) {
+        @include flex-direction(row);
+    }
+}
+
+.formInput {
+    border-radius: var(--border-radius);
+    color: #0e1118;
+    display: flex;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.8rem;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    width: 100%;
+}

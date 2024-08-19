@@ -28,25 +28,25 @@ const normaliseNEWSAPIData = (data) => {
   });
 }
 
-// const normaliseGNEWSData = (data) => {
-//   console.log(data);
-//   return data.map(article => {
-//     const { webPublicationDate, webUrl, ...rest } = article;
+const normaliseGNEWSData = (data) => {
+  console.log(data);
+  return data.map(article => {
+    const { webPublicationDate, webUrl, ...rest } = article;
 
-//     return {
-//       url: webUrl,
-//       publishedAt: webPublicationDate,
-//       ...rest,
-//     }
-//   });
-// }
+    return {
+      url: webUrl,
+      publishedAt: webPublicationDate,
+      ...rest,
+    }
+  });
+}
 
 export const normalizeData = (data, apiIndex) => {
     switch (apiIndex) {
       case 'GUARDIAN': // GUARDIAN API
         return normaliseGuardianData(data?.response?.results);
-      // case 'GNEWS': // GNEWS API
-      //   return normaliseGNEWSData(data?.articles);
+      case 'GNEWS': // GNEWS API
+        return normaliseGNEWSData(data?.articles);
     case 'NEWSAPI': // NEWSAPI API
         return normaliseNEWSAPIData(data?.articles);
       default:

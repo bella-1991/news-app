@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { MdChevronRight } from '@react-icons/all-files/md/MdChevronRight';
 import styles from './continue-reading.module.scss';
 
-const ContinueReading = ({ url, customCss }) => {
-
-  return (
+const ContinueReading = ({ url, customCss, loading }) => {
+  return !loading && (
     <Link to={url} className={`${styles.continueReading} ${customCss}`}>
       <span>
         Read More

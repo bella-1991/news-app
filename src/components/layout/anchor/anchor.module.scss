@@ -3,10 +3,14 @@
 .menu {
     border-bottom: 1px solid var(--base-bg-color-gray);
     position: sticky;
-    top: 8.3rem;
+    top: 6.5rem;
     background: var(--base-bg-color-light);
     z-index: 9;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+
+    @include min(tablet) {
+        top: 8.3rem;
+    }
 }
 
 .container {

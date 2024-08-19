@@ -54,7 +54,7 @@
     @include flex-align(center, space-between);
     border-top: 1px solid var(--base-bg-color-gray);
 
-    > span {
+    > span:last-of-type {
         margin-left: auto;
     }
 }

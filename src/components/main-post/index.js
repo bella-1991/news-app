@@ -1,18 +1,31 @@
 import ContinueReading from '../continue-reading';
+import Skeleton from '../skeleton';
 import styles from './main-post.module.scss';
 
-function MainPost({ article }) {
+function MainPost({ article, loading }) {
     const { title, description, image, url } = article || {};
 
-    return article && (  
+    return (          
         <div className={styles.mainPost}>
             <div className={styles.imgContainer}>
-                <img src={image} alt={title} className={styles.bgImage} />
+                <img src={image ? image : 'https://placehold.co/100010400?text=News'} alt={title} className={styles.bgImage} />
             </div>
             <div className={styles.textContainer}>
-                <h1 className={styles.title}>{title}</h1>
-                <p>{description}</p>
-                <ContinueReading url={url} customCss={styles.link} />
+                {loading ? (
+                    <>
+                        <Skeleton height="38px" variant='heading' />
+                        <Skeleton height="20px" variant='paragraph' />
+                        <Skeleton height="20px" variant='paragraph' />
+                        <Skeleton height="20px" variant='paragraph' />
+                        <Skeleton width="100px" height="15px" />
+                    </>
+                ) : (
+                    <>
+                        <h1 className={styles.title}>{title}</h1>
+                        <p>{description}</p>
+                        <ContinueReading url={url} customCss={styles.link} />
+                    </>
+                )}
             </div>
         </div>
     );

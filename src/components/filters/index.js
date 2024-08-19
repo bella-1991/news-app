@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFilters } from '../../features/news/newsSlice';
 import { IoMdClose } from '@react-icons/all-files/io/IoMdClose';
 import { IoIosMenu } from '@react-icons/all-files/io/IoIosMenu';
 import styles from './filters.module.scss';
 
 function Filters() {
-  const [openFilters, setOpenFilters] = useState(false);
+  const filtersOpen = useSelector(state => state.news.filtersOpen);
+  const dispatch = useDispatch();
 
   const handleOverlayClickClose = (event) => {
     if (event.target.classList.contains(styles.filtersContainer)) {
-      setOpenFilters(false);
+      dispatch(toggleFilters(false));
     }
   };
 
   return ( 
     <div className={styles.filters || ''}>      
-      <button onClick={() => setOpenFilters(true)}>
+      <button onClick={() => dispatch(toggleFilters(true))}>
         <IoIosMenu size={32} />
       </button>
       <div 
@@ -22,11 +25,11 @@ function Filters() {
         tabIndex={0}
         role="button"
         aria-label="Close filters"
-        className={`${styles.filtersContainer || ''} ${openFilters ? styles.show || '' : ''}`}>
+        className={`${styles.filtersContainer || ''} ${filtersOpen ? styles.show || '' : ''}`}>
         <div className={styles.filtersContent}>
           <div className={styles.filtersHeader}>
             Filters     
-            <button onClick={() => setOpenFilters(false)}>
+            <button onClick={() => dispatch(toggleFilters(false))}>
               <IoMdClose />
             </button>
           </div>

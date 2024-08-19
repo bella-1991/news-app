@@ -1,9 +1,11 @@
-import styles from './anchor.module.scss';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Navigation as nav } from '../../../constants'
-import { useState } from 'react';
+import styles from './anchor.module.scss';
 
 function Anchor() {
-    const [active, setActive] = useState('world');
+    const state = useSelector((state) => state.news);
+    const { searchTerm } = state || {};
     
     return ( 
         <div className={styles.menu}>
@@ -12,7 +14,7 @@ function Anchor() {
                     {nav.map(item => (
                         <li 
                             key={item.label}
-                            className={`${styles.item || ''} ${active === item.label ? styles.active || '' : ''}`}
+                            className={`${styles.item || ''} ${searchTerm === item.label ? styles.active || '' : ''}`}
                         >
                             {item.text}
                         </li>

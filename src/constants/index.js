@@ -68,3 +68,21 @@ export const Navigation = [{
     label: 'weather'
 }]
 
+
+/*
+ * Defaults
+ */
+
+export const Defaults = {
+    AVAILABLE_LANG: ['en', 'sv'],
+    CATEGORY: '',
+    ERROR: '',
+    FEATURED_NEWS: [],
+    FILTERS: [],
+    FILTERS_OPEN: false,
+    LANG: 'en',
+    LOADING: true,
+    NEWS: [],
+    SEARCH_OPEN: false,
+    SEARCH_TERM: Navigation[0].label,
+}

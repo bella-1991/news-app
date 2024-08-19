@@ -19,7 +19,6 @@ const Search = () => {
   }, [searchOpen]);
 
   const handleSearch = () => {
-    console.log(searchVal);
     dispatch(toggleSearch(false));
     dispatch(changeSearchTerm(searchVal));
     setSearchVal('');
@@ -28,14 +27,17 @@ const Search = () => {
   const handleOverlayClickClose = (event) => {
     if (event.target.classList.contains(styles.searchForm)) {
       dispatch(toggleSearch(false));
+      setSearchVal('');
     }
   };
 
   return (
-    <div className={styles.search || ''}>
-      <button onClick={() => dispatch(toggleSearch(true))}>
-        <BiSearchAlt size={24} />
-      </button>
+    <div className={styles.search || ''}>     
+      <Button 
+        noStyle 
+        onClick={() => dispatch(toggleSearch(true))} 
+        icon={<BiSearchAlt size={24} />} 
+      />
 
       {searchOpen && (
         <div

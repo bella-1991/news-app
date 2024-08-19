@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import Skeleton from '../skeleton';
 import Card from '../card';
 import styles from './news-list.module.scss'
 
@@ -19,7 +18,7 @@ function NewsList({ articles, searchTerm, direction, featured, loading, length }
           ))
         ) : (
           articles?.map((article) => {
-            const { id, url, title, urlToImage, description, author, source, publishedAt, image } = article || {};
+            const { url, title, urlToImage, description, author, source, publishedAt, image, category } = article || {};
   
             if (title.includes('Removed')) return null;
   
@@ -34,6 +33,7 @@ function NewsList({ articles, searchTerm, direction, featured, loading, length }
                 source={source}
                 publishedAt={publishedAt}
                 direction={direction}
+                category={category}
               />
           )})
         )}

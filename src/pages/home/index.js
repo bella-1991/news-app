@@ -2,48 +2,20 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchNewsData } from '../../features/news/newsSlice';
 import MainPost from '../../components/main-post';
-import { API as api, Navigation as nav } from '../../constants';
-import { normalizeData } from '../../helpers/normalise-data';
+import { API as api } from '../../constants';
 import NewsList from '../../components/news-list';
 import Pagination from '../../components/pagination';
 
 function Home() {
     const state = useSelector((state) => state.news);
-    const { searchTerm, loading, error, newsData, featuredNews } = state || {};
+    const { category, searchTerm, loading, filteredNews, featuredNews, page, pages } = state || {};
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(fetchNewsData());
-      // const fetchData = async () => {
-      //   try {
-      //     // Make API calls simultaneously using axios and Promise.all
-      //     const responses = await Promise.all(
-      //       Object.values(api).map((item) => 
-      //         axios
-      //           .get(`${item.url}${searchTerm}&${item.keyText}=${item.key}${item.additionalParams ? item.additionalParams : ''}`)
-      //           .then(response => response.data)
-      //           .catch(error => {
-      //             console.log(error)
-      //           })
-      //     ));
-  
-      //     // Normalize each response based on the API index
-      //     const normalizedResponses = responses.map((response, index) => {
-      //       return normalizeData(response, Object.keys(api)[index])
-      //     });
-  
-      //     // console.log(normalizedResponses)
-  
-      //     // Set the normalized data in state
-      //     setFeaturedNews(normalizedResponses.flat().slice(0,3))
-      //     setNewsData(normalizedResponses.flat().slice(3));
-      //   } catch (error) {
-      //     console.error("Error fetching data:", error);
-      //   }
-      // };
-  
-      // fetchData();
-    }, [searchTerm]);
+      setTimeout(() => {
+        // dispatch(fetchNewsData(api));
+      }, 2000); // NYT has a time limit
+    }, [dispatch, searchTerm]);
 
     return ( 
         <div>
@@ -61,9 +33,9 @@ function Home() {
           <NewsList 
             loading={loading}
             length={3}
-            articles={newsData} 
-            searchTerm={searchTerm} />
-          <Pagination currentPage={1} pagePath="example" totalPages={loading ? 1 : 60} />
+            articles={filteredNews} 
+            searchTerm={category || searchTerm} />
+          <Pagination currentPage={page} pagePath="example" totalPages={loading ? page : pages} />
         </div>
      );
 }

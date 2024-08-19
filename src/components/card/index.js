@@ -6,13 +6,17 @@ import { formatDate } from '../../helpers/date-time';
 import styles from './card.module.scss';
 import ContinueReading from '../continue-reading';
 
-function Card({ title, image, description, url, author, publishedAt, source, direction = 'top', loading }) {
+function Card({ title, image, description, url, author, publishedAt, source, direction = 'top', loading, category }) {
   const formatedDate = publishedAt && formatDate(publishedAt, 'DD.MM.YYYY', '/', 'en-GB');
 
   return (
     <div className={`${styles.card || ''} ${styles[direction] || ''}`}>
       <div className={styles.imgContainer || ''}>
-        <LazyImage src={image ? image : 'https://placehold.co/100010400?text=News'} alt={title} />
+        {loading ? (
+            <Skeleton variant='image' />
+        ) : (
+            <LazyImage src={image ? image : 'https://placehold.co/100010400?text=News'} alt={title} />
+        )}
       </div>
       <div className={styles.textContainer || ''}>
         <div className={styles.cardBody || ''}>
@@ -20,7 +24,7 @@ function Card({ title, image, description, url, author, publishedAt, source, dir
             <>
                 <Skeleton width="100px" height="20px" />
                 <Skeleton height="38px" variant='heading' />
-                <Skeleton height="20px" variant='paragraph' />
+                <Skeleton height="20px" variant='paragraph' /> 
                 <Skeleton height="20px" variant='paragraph' />
                 <Skeleton height="20px" variant='paragraph' />
                 <Skeleton width="100px" height="15px" />

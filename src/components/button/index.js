@@ -12,6 +12,7 @@ function Button({
   isInternalLink = false,
   onClick = null,
   icon = null,
+  noStyle = false,
 }) {
   const classes = `${styles[buttonType] || ''} ${buttonSize ? styles[`${buttonSize}_size`] : ''} `;
 
@@ -29,7 +30,7 @@ function Button({
   const linkAttr = to ? { href: to } : { onClick };
 
   return (
-    linkAttr ? (
+    to ? (
       <a
         title={btnTitle}
         aria-label={btnTitle}
@@ -44,7 +45,7 @@ function Button({
     ) : (
       <button 
         type='button'
-        className={`${classes || ''}`}
+        className={`${noStyle ? '' : classes || ''}`}
         {...linkAttr}
       >
         {btnText}

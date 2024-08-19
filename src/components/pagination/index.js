@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { MdLastPage } from '@react-icons/all-files/md/MdLastPage';
 import { MdFirstPage } from '@react-icons/all-files/md/MdFirstPage';
 import { MdChevronRight } from '@react-icons/all-files/md/MdChevronRight';
 import { MdChevronLeft } from '@react-icons/all-files/md/MdChevronLeft';
+import { handlePhangePage } from '../../features/news/newsSlice';
 import keygen from '../../helpers/keygen';
 import styles from './pagination.module.scss';
 
@@ -24,15 +26,13 @@ const Pagination = ({
   hidePrevious = false,
   hideNext = false,
 }) => {
+  const dispatch = useDispatch();
+
   const current = Number(currentPage);
   const total = Number(totalPages);
+
   function getPagePath(index) {
-    return (
-      (index === 1
-        ? pagePath
-        : `${pagePath}/page/${index}`) +
-      (anchorLabel ? `#${anchorLabel}` : '')
-    );
+    dispatch(handlePhangePage(index));
   }
 
   const midPoints = 'MID';
@@ -99,7 +99,7 @@ const Pagination = ({
         <li className={styles.goToFirst || ''}>
           {current > 1 ? (
             <Link
-              to={getPagePath(1)}
+              onClick={() => getPagePath(1)}
               className={`${styles.button || ''} ${styles.isActive || ''}`}
             >
               {firstComp}
@@ -114,7 +114,7 @@ const Pagination = ({
         <li className={styles.goToPrevious || ''}>
           {current > 1 ? (
             <Link
-              to={getPagePath(current - 1)}
+              onClick={() => getPagePath(current - 1)}
               className={`${styles.button || ''} ${styles.isActive || ''}`}
             >
               {previousComp}
@@ -156,7 +156,7 @@ const Pagination = ({
                       {current === page ? (
                         <span>{page}</span>
                       ) : (
-                        <Link to={getPagePath(page)} className="pagination-gtm">
+                        <Link onClick={() => getPagePath(page)} className="pagination-gtm">
                           {page}
                         </Link>
                       )}
@@ -173,7 +173,7 @@ const Pagination = ({
                       {current === page ? (
                         <span>{page}</span>
                       ) : (
-                        <Link to={getPagePath(page)} className="pagination-gtm">
+                        <Link onClick={() => getPagePath(page)} className="pagination-gtm">
                           {page}
                         </Link>
                       )}
@@ -190,7 +190,7 @@ const Pagination = ({
                     page === 1 ? styles.firstPage || '' : ''
                   } ${page === total ? styles.lastPage || '' : ''} `}
                 >
-                  <Link to={getPagePath(page)} className="pagination-gtm">
+                  <Link onClick={() => getPagePath(page)} className="pagination-gtm">
                     {page}
                   </Link>
                 </li>
@@ -206,7 +206,7 @@ const Pagination = ({
         <li className={styles.goToNext || ''}>
           {current < total ? (
             <Link
-              to={getPagePath(current + 1)}
+              onClick={() => getPagePath(current + 1)}
               className={`${styles.button || ''} ${styles.isActive || ''}`}
             >
               {nextComp}
@@ -221,7 +221,7 @@ const Pagination = ({
         <li className={styles.goToLast || ''}>
           {current !== total ? (
             <Link
-              to={getPagePath(total)}
+              onClick={() => getPagePath(total)}
               className={`${styles.button || ''} ${styles.isActive || ''}`}
             >
               {lastComp}

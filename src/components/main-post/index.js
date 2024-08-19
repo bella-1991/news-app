@@ -1,5 +1,6 @@
 import ContinueReading from '../continue-reading';
 import Skeleton from '../skeleton';
+import LazyImage from '../../hooks/lazy-image';
 import styles from './main-post.module.scss';
 
 function MainPost({ article, loading }) {
@@ -8,7 +9,11 @@ function MainPost({ article, loading }) {
     return (          
         <div className={styles.mainPost}>
             <div className={styles.imgContainer}>
-                <img src={image ? image : 'https://placehold.co/100010400?text=News'} alt={title} className={styles.bgImage} />
+                {loading ? (
+                    <Skeleton variant='image' />
+                ) : (
+                    <LazyImage src={image ? image : 'https://placehold.co/100010400?text=News'} alt={title} className={styles.bgImage} />
+                )}
             </div>
             <div className={styles.textContainer}>
                 {loading ? (

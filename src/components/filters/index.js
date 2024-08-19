@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleFilters } from '../../features/news/newsSlice';
 import { IoMdClose } from '@react-icons/all-files/io/IoMdClose';
 import { IoIosMenu } from '@react-icons/all-files/io/IoIosMenu';
+import Button from '../button';
+import { toggleFilters } from '../../features/news/newsSlice';
 import styles from './filters.module.scss';
 
 function Filters() {
@@ -17,9 +18,11 @@ function Filters() {
 
   return ( 
     <div className={styles.filters || ''}>      
-      <button onClick={() => dispatch(toggleFilters(true))}>
-        <IoIosMenu size={32} />
-      </button>
+      <Button 
+        noStyle 
+        onClick={() => dispatch(toggleFilters(true))} 
+        icon={<IoIosMenu size={32} />} 
+      />
       <div 
         onClick={(e) => handleOverlayClickClose(e)}
         tabIndex={0}
@@ -28,10 +31,12 @@ function Filters() {
         className={`${styles.filtersContainer || ''} ${filtersOpen ? styles.show || '' : ''}`}>
         <div className={styles.filtersContent}>
           <div className={styles.filtersHeader}>
-            Filters     
-            <button onClick={() => dispatch(toggleFilters(false))}>
-              <IoMdClose />
-            </button>
+            Filters       
+            <Button 
+              noStyle 
+              onClick={() => dispatch(toggleFilters(false))} 
+              icon={<IoMdClose />} 
+            />  
           </div>
         </div>
       </div>

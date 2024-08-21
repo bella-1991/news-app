@@ -15,9 +15,9 @@ function Home() {
       setTimeout(() => {
         dispatch(fetchNewsData({ 
           NYT: api.NYT, 
-          // NEWSAPI: api.NEWSAPI, 
+          NEWSAPI: api.NEWSAPI, 
           GUARDIAN: api.GUARDIAN }));
-        // dispatch(fetchSourcesData(api.NEWSAPI));
+        dispatch(fetchSourcesData(api.NEWSAPI));
       }, 2000); // NYT has a time limit
     }, [dispatch, searchTerm]);
 

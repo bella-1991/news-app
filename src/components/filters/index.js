@@ -17,11 +17,7 @@ function Filters() {
     setStateFilters(filters);
   }, [dispatch, filters]);
 
-  console.log(stateFilters);
-
   const handleChange = (name, value) => {
-    // console.log(name);
-    // console.log(value);
     setStateFilters({ ...stateFilters, [name]: value === 'all' ? '' : value });
   };
 

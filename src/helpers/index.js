@@ -130,8 +130,6 @@ export const getSortedNews = (normalizedResponses, page, filters) => {
       return 
   }
 
-  console.log(sortedResults);
-
   const filteredNews = filterByResultPerPage(sortedResults, page, rpp);
   const pages = (((sortedResults.length) + +rpp - page) / +rpp);
 

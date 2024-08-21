@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import { normalizeData, getUniqueValues, getSortedNews } from '../../helpers';
-import { Defaults as defaultValues, API as api } from '../../constants';
+import { Defaults as defaultValues, API as api, Navigation as nav } from '../../constants';
 
 const initialState = {
     allNews: defaultValues.NEWS,
@@ -24,7 +24,7 @@ const initialState = {
     page: defaultValues.PAGE,
     pages: defaultValues.PAGES,
     searchOpen: defaultValues.SEARCH_OPEN,
-    searchTerm: defaultValues.SEARCH_TERM,
+    searchTerm: nav[0].label,
 }
 
 export const fetchCategoryNews = createAsyncThunk(
@@ -135,13 +135,12 @@ const changeFiltersOnly = (filters, dispatch) => {
 export const handleFiltersChange = (filters) => (dispatch, getState) => {
     const state = getState().news;
 
-    // if (filters.source !== state.filters.source && filters.source.length) {
-    //     // source change. fetch news from NewsAPI only
-    //     changeFiltersOnly(filters, dispatch);
-    //     // dispatch(fetchNewsBySource(api.NEWSAPI));
-    //     return;
-    // } else 
-    if (filters.orderBy !== state.filters.orderBy) {
+    if (filters.source !== state.filters.source && filters.source.length) {
+        // source change. fetch news from NewsAPI only
+        changeFiltersOnly(filters, dispatch);
+        dispatch(fetchNewsBySource(api.NEWSAPI));
+        return;
+    } else if (filters.orderBy !== state.filters.orderBy) {
         // order by change. fetch news from all 
         changeFiltersOnly(filters, dispatch);
         dispatch(fetchNewsData(api))
@@ -150,8 +149,8 @@ export const handleFiltersChange = (filters) => (dispatch, getState) => {
         // lang change. fetch news from api's that support lang 
         changeFiltersOnly(filters, dispatch);
         dispatch(fetchNewsData({ 
-            // GNEWS: api.GNEWS, 
-            // NEWSAPI: api.NEWSAPI, 
+            GNEWS: api.GNEWS, 
+            NEWSAPI: api.NEWSAPI, 
             GUARDIAN: api.GUARDIAN }));
         return;
     } else {
@@ -169,6 +168,7 @@ const newsSlice = createSlice({
     reducers: {
         changeSearchTerm: (state, action) => {
             state.searchTerm = action.payload;
+            state.loading = true;
         },
         changeCategory: (state, action) => {
             state.category = action.payload;
@@ -190,6 +190,7 @@ const newsSlice = createSlice({
             state.filters = action.payload.filters;
             state.filters.rpp = +action.payload.filters.rpp;
             state.filtersOpen = false;
+            state.loading = true;
         },
         handleChangePageDispatch: (state, action) => {
             state.filteredNews = action.payload.filteredNews;
@@ -198,6 +199,7 @@ const newsSlice = createSlice({
             state.filteredNews = action.payload.filteredNews;
             state.page = action.payload.page;
             state.pages = action.payload.pages;
+            state.loading = false;
         },
         setCategories: (state, action) => {
             state.filterOptions.categories.options = action.payload;

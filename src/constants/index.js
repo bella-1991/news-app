@@ -13,17 +13,17 @@ export const API = {
         langText: 'lang',
         additionalPrarams: null
     },
-    // NEWSAPI: {
-    //     search: 'https://newsapi.org/v2/everything?q=',
-    //     category: 'https://newsapi.org/v2/top-headlines/',
-    //     key: '2facf914e85d4da89ecb3d5421a23dcb',
-    //     keyText: 'apiKey',
-    //     sort: 'relevance',
-    //     sortText: 'sortBy',
-    //     sourcesText: 'sources',
-    //     langText: 'language',
-    //     additionalParams: '&pageSize=10'
-    // },
+    NEWSAPI: {
+        search: 'https://newsapi.org/v2/everything?q=',
+        category: 'https://newsapi.org/v2/top-headlines/',
+        key: '2facf914e85d4da89ecb3d5421a23dcb',
+        keyText: 'apiKey',
+        sort: 'relevance',
+        sortText: 'sortBy',
+        sourcesText: 'sources',
+        langText: 'language',
+        additionalParams: '&pageSize=10'
+    },
     GUARDIAN: {
         search: 'https://content.guardianapis.com/search?&q=',
         key: '4044657d-d5ea-417a-a986-5aaa6683bf2b',

@@ -28,7 +28,7 @@ function MainPost({ article, loading }) {
                     <>
                         <h1 className={styles.title}>{title}</h1>
                         <p>{description}</p>
-                        <ContinueReading url={url} customCss={styles.link} />
+                        {url && <ContinueReading url={url} customCss={styles.link} />}
                     </>
                 )}
             </div>

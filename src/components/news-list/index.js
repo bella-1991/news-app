@@ -2,11 +2,18 @@ import PropTypes from 'prop-types';
 import Card from '../card';
 import styles from './news-list.module.scss'
 
-function NewsList({ articles, searchTerm, direction, featured, loading, length }) {
+function NewsList({ articles, searchTerm, direction, featured, loading, length, error }) {
+
   
   return (
     <div className={styles.newsList}>
       <h2 className={styles.title}>{`${searchTerm} News`}</h2>
+      {(!loading && !articles?.length) && (
+        <div>
+          Could not load Articles. Please try again later.
+          {error && ` ${error}`}
+        </div>
+      )}
       <div className={`${styles.posts} ${featured ? styles.featured || '' : styles.grid || ''}`}>
         {loading ? (
           [...Array(length)].map((item, index) => (

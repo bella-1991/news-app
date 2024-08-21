@@ -27,7 +27,7 @@
 }
 
 .filtersHeader {
-    @include flex-align(flex-start, space-between);
+    @include flex-align(center, space-between);
 }
 
 .filtersContent {
@@ -41,4 +41,16 @@
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
     font-size: 1.8rem;
     z-index: 20;
+    @include flex-direction(column);
+    @include flex-align(stretch, space-between);
+}
+
+.filtersBody {
+    flex: 1;
+    @include flex-direction(column);
+}
+
+.section {
+    @include flex-direction(column);
+    @include flex-align(flex-start, space-between);
 }

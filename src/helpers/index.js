@@ -77,6 +77,13 @@ export const normalizeData = (data, apiIndex) => {
     }
 };
 
+export function getObjectValue(obj, path) {
+  if (!obj) return null;
+  if (!path) return obj;
+  const properties = path.split(".");
+  return getObjectValue(obj[properties.shift()], properties.join("."));
+}
+
 export const filterByResultPerPage = (results, currentPage, rpp) => {  
   const indexOfLast = currentPage * rpp;
   const indexOfFirst = indexOfLast - rpp;
@@ -85,18 +92,71 @@ export const filterByResultPerPage = (results, currentPage, rpp) => {
   return currentList
 }
 
-export const getSortedNews = (normalizedResponses, rpp, page) => {
-  const pages = (((normalizedResponses.length - 3) + rpp - page) / rpp);
+export const getSortedNews = (normalizedResponses, page, filters) => {
+  const { author, category, rpp, sort } = filters;
+  let news;
+  let sortedResults;
+  const filterCriteria = {
+    author,
+    category,
+  };
+
   const allNews = normalizedResponses.slice(3);
   const featuredNews = normalizedResponses.slice(0,3);
-  const filteredNews = filterByResultPerPage(allNews, page, rpp);
+  
+  news = normalizedResponses.slice(3).filter(item => {
+    // validates all filter criteria
+    return Object.keys(filterCriteria).every(key => {
+      // ignores an empty filter
+      if (!filterCriteria[key].length) return true;
+
+      return item[key] === filterCriteria[key];
+    })
+  })
+
+  // sorted according to order
+  switch(sort) {
+    case 'REL':
+      sortedResults = news
+      break;
+    case 'ASCE':
+      sortedResults = news.toSorted((a, b) => a.title > b.title ? 1 : -1)
+      break;
+    case 'DESC':
+      sortedResults = news.toSorted((a, b) => a.title > b.title ? 1 : -1).toReversed()
+      break;
+    default:
+      sortedResults = news
+      return 
+  }
+
+  console.log(sortedResults);
+
+  const filteredNews = filterByResultPerPage(sortedResults, page, rpp);
+  const pages = (((sortedResults.length) + +rpp - page) / +rpp);
 
   return { 
     allNews: allNews, 
     featuredNews: featuredNews,
     filteredNews: filteredNews,
-    numberOfResults: allNews.length,
+    numberOfResults: sortedResults.length,
     pages: Math.floor(pages), 
     page: page,
   };
+}
+
+export const getUniqueValues = (news, valueToFilter) => {
+  return news.reduce((acc, obj) => {
+    if (!acc.includes(getObjectValue(obj, valueToFilter))) {
+        acc.push(getObjectValue(obj, valueToFilter));
+    }
+    return acc;
+  }, [])
+  .filter(item => item)
+  .map(item => {
+    return {
+      value: item,
+      code: item
+    }
+  })
 }

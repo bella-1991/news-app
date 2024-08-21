@@ -6,7 +6,7 @@ import { MdLastPage } from '@react-icons/all-files/md/MdLastPage';
 import { MdFirstPage } from '@react-icons/all-files/md/MdFirstPage';
 import { MdChevronRight } from '@react-icons/all-files/md/MdChevronRight';
 import { MdChevronLeft } from '@react-icons/all-files/md/MdChevronLeft';
-import { handlePhangePage } from '../../features/news/newsSlice';
+import { handleChangePage, changePage } from '../../features/news/newsSlice';
 import keygen from '../../helpers/keygen';
 import styles from './pagination.module.scss';
 
@@ -32,7 +32,8 @@ const Pagination = ({
   const total = Number(totalPages);
 
   function getPagePath(index) {
-    dispatch(handlePhangePage(index));
+    dispatch(changePage(index));
+    dispatch(handleChangePage(index));
   }
 
   const midPoints = 'MID';

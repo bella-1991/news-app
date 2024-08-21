@@ -19,5 +19,5 @@ Pull Docker Image [here](https://hub.docker.com/r/shalini91/news-app-shf).
 Assumptions:
 
 1. 4 API's are used - New York Times, The Guardian, GNews and NewsAPI
-2. Some API's have limited usage of 100 requests per day therefore app might break if limi is exceeded.
+2. Some API's have limited usage of 100 requests per day therefore app might break if limit is exceeded. Guardian and NYT have higher usage limits. Comment others to view results of these.
 3. Cannot combine some filters as per API documentation. Some filters might make an API call and others will do the filtering with existing data without an API call

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import { normalizeData, getUniqueValues, getSortedNews } from '../../helpers';
 import { Defaults as defaultValues, API as api, Navigation as nav } from '../../constants';
+import { sourcesObject } from '../../tests/sources';
+import { newsObject } from '../../tests/news';
 
 const initialState = {
     allNews: defaultValues.NEWS,
@@ -63,7 +65,9 @@ export const fetchNewsData = createAsyncThunk(
                 .get(`${item.search}${searchTerm}&${item.keyText}=${item.key}&${item.sortText}=${filters.orderBy}&${item.langText}=${filters.lang}${item.additionalParams ? item.additionalParams : ''}`)
                 .then(response => response.data)
                 .catch(error => {
-                    console.log(error)
+                    console.log(error);
+                    // send dummy data for testing purposes when API request times out
+                    return newsObject
                 })
         ));
 
@@ -91,7 +95,9 @@ export const fetchSourcesData = createAsyncThunk(
             .get(`${api.category}${api.sourcesText}?${api.keyText}=${api.key}&language=${filters.lang}`)
             .then(response => response.data && response.data.sources && response.data.sources.map(source => ({ code: source.id, value: source.name })))
             .catch(error => {
-                console.log(error)
+                console.log(error);
+                // send dummy data for testing purposes when API request times out
+                return sourcesObject.sources.map(source => ({ code: source.id, value: source.name }));
             })
     }
 );

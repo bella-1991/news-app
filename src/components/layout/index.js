@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import Header from './header';
 import Footer from './footer';
 import Anchor from './anchor'
-// import FloatingArea from '../floating-area';
 import styles from './layout.module.scss'
 
 export default function Layout() {
@@ -43,7 +42,6 @@ export default function Layout() {
               </Suspense>
           </main>
           <Footer />
-          {/* <FloatingArea /> */}
       </div>
   )
 }

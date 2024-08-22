@@ -21,3 +21,12 @@ Assumptions:
 1. 4 API's are used - New York Times, The Guardian, GNews and NewsAPI
 2. Some API's have limited usage of 100 requests per day therefore app might break if limit is exceeded. Guardian and NYT have higher usage limits. Comment others to view results of these.
 3. Cannot combine some filters as per API documentation. Some filters might make an API call and others will do the filtering with existing data without an API call
+4. Only the section under {search-term} news will be filtered unless an API call is made
+
+![News Loading Desktop](image-1.png)
+![News Loaded Desktop](image-2.png)
+![News with pagination desktop](image-3.png)
+![Filters Desktop](image-4.png)
+![Search Desktop](image-5.png)
+![Mobile](image-6.png)
+![Tablet](image-7.png)
